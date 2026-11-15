@@ -4,10 +4,11 @@
 <title>Hokkaido Travel Journal 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:"HuninnWeb";src:local("jf-openhuninn"),local("jf open 粉圓"),url("jf-openhuninn.ttf") format("truetype");font-display:swap}
 :root{--bg:#f6f2e9;--card:#fbf9f4;--oat:#e8dfcd;--blue:#d7e0ea;--blue2:#a9bdd3;--tan:#a89a82;--brown:#6b5646;--ink:#3b2d25;--line:#ddd3c0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#221c18;--card:#2b2420;--oat:#3a312a;--blue:#2d3a48;--blue2:#7f9ab5;--tan:#b5a68c;--brown:#d3bfa8;--ink:#f1e9dc;--line:#463b32}}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.75 "Zen Maru Gothic","Hiragino Maru Gothic ProN","jf-openhuninn","Noto Sans TC",system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.75 "HuninnWeb","jf-openhuninn","Zen Maru Gothic","Hiragino Maru Gothic ProN","Noto Sans TC",system-ui,sans-serif}
 a{color:var(--brown)}h1,h2,h3{font-family:inherit;font-weight:500;margin:0;color:var(--brown)}
 nav{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:2px;overflow-x:auto;padding:8px 10px;padding-top:calc(8px + env(safe-area-inset-top,0px))}
 nav a{flex:none;text-decoration:none;padding:6px 14px;border-radius:99px;font-size:14px;color:var(--brown)}nav a.on{background:var(--oat);color:var(--ink)}
@@ -51,10 +52,10 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;b
 <section id="trip"><div class="chips" id="chips"></div><div id="day"></div></section>
 <section id="food"><h2>餐廳專區</h2><p class="sub">PDF 已排定的餐廳在前；「推薦」「候補」為我依動線補充的建議，營業時間與價格請出發前在 Google Maps 確認。</p><div class="grid" id="foodList"></div></section>
 <section id="budget"><h2>旅行預算</h2><p class="sub">資料存在這支手機的瀏覽器中。匯率為手動設定，非即時。</p><div class="box"><div style="display:flex;gap:10px;flex-wrap:wrap"><label>日幣匯率 1 JPY = <input id="rate" type="number" step="0.001" style="width:90px"> TWD</label><label>總預算 TWD <input id="total" type="number" style="width:110px"></label><label>同行 <input id="n0" style="width:70px"> <input id="n1" style="width:70px"> <input id="n2" style="width:70px"> <input id="n3" style="width:70px"></label></div></div>
-<div class="sum" id="sum"></div>
+<div class="sum" id="sum"></div><div class="box" id="settle"></div>
 <div class="box"><h3>新增支出</h3><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><select id="nc"></select><input id="nd" placeholder="項目說明"><input id="na" type="number" placeholder="金額" style="width:100px"><select id="ncur"><option>JPY</option><option>TWD</option></select><select id="np"></select><button id="add">新增</button></div></div>
 <div class="box scroll"><table><thead><tr><th>類別</th><th>說明</th><th>金額</th><th>幣別</th><th>付款人</th><th>台幣</th><th></th></tr></thead><tbody id="rows"></tbody></table></div></section>
-<section id="photos"><h2>旅行相簿</h2><p class="sub">照片存在這支裝置的瀏覽器中，不會同步到另一支手機。</p><div class="chips" id="pchips"></div><input type="file" id="up" accept="image/*" multiple><div class="masonry" id="wall" style="margin-top:14px"></div></section>
+
 <section id="list"><h2>旅行清單</h2><div id="lists"></div><div class="box"><div style="display:flex;gap:8px;flex-wrap:wrap"><select id="lg"></select><input id="li" placeholder="新增項目"><button id="la">新增</button></div></div></section>
 <section id="weather"><h2>天氣資訊</h2><p class="sub">此頁無法連接即時天氣資料，因此不顯示任何數字。請點下方連結查看官方預報與警報。</p><div class="grid" id="wx"></div>
 <div class="box"><h3>冬季自駕提醒</h3><ul class="safe"><li>12 月初日落約在下午 4 點多，山區請在天黑前回到市區。</li><li>橋面、路口與看似乾燥的路面可能有黑冰，煞車與轉向都要慢。</li><li>降雪或暴風雪時，縮短行程，優先保留已訂餐廳。</li><li>油量保持在一半以上，路邊停車避開除雪路線。</li></ul></div></section>
@@ -67,9 +68,9 @@ days:[
 {n:1,date:"11/29",title:"抵達札幌",stay:{n:"札幌 APA 度假酒店",q:"APA Hotel & Resort Sapporo"},ev:[
 {t:"12:20",n:"桃園機場出發（TR 892）",d:"飛行約 3 小時 50 分",q:"桃園國際機場"},
 {t:"17:00",n:"抵達新千歲機場",d:"預計停留：約 30 分",q:"新千歲機場"},
-{t:"17:30",n:"入境、領行李、租車、取車",d:"取車時請確認下方清單",drive:"開車約 1 小時前往札幌",q:"新千歲機場 租車"},
-{t:"19:30",n:"大通公園（慕尼黑聖誕市集）或狸小路",d:"自由選擇其一",q:"大通公園 札幌"},
-{t:"21:00",n:"晚餐：湯咖哩",d:"餐廳尚未指定，見餐廳專區候補",q:"札幌 湯咖哩"}],
+{t:"17:30",n:"入境、領行李、租車、取車",d:"租車公司在機場外，需搭計程車前往。取車流程與地址見下方",drive:"開車約 1 小時前往札幌",q:"〒066-0015 千歳市青葉8丁目9番8"},
+{t:"19:30",n:"大通公園（慕尼黑聖誕市集）或狸小路",d:"自由選擇其一，特色與營業時間見下方",q:"大通公園 札幌"},
+{t:"21:00",n:"晚餐：湯咖哩",d:"推薦：Soup Curry GARAKU、湯咖哩 Suage+，詳見下方",q:"札幌 湯咖哩"}],
 notes:["是否已安裝冬季雪胎","車輛是否有雪刷、除冰工具","雨刷、車燈、除霧功能是否正常","ETC 卡、租車保險及道路救援範圍","雪胎不代表不會打滑：不急煞、不急轉方向盤、不跟前車太近"]},
 {n:2,date:"11/30",title:"札幌・小樽",stay:{n:"札幌 APA 度假酒店",q:"APA Hotel & Resort Sapporo"},ev:[
 {t:"09:30",n:"出門",d:"",drive:"開車 15–30 分",q:"APA Hotel & Resort Sapporo"},
@@ -78,7 +79,7 @@ notes:["是否已安裝冬季雪胎","車輛是否有雪刷、除冰工具","雨
 {t:"12:30",n:"小樽三角市場",d:"午餐",q:"小樽三角市場"},
 {t:"13:30",n:"小樽運河",d:"白天與黃昏各拍一次，光線不同",q:"小樽運河"},
 {t:"15:30",n:"界町通商店街",d:"建議停留約 2 小時",drive:"開車 35–60 分回札幌",q:"界町通 小樽"},
-{t:"19:00",n:"晚餐：牛肉涮涮鍋・壽喜燒專門店 禪",d:"已訂位。吃飽有時間可再去大通公園或狸小路",q:"牛肉涮涮鍋 壽喜燒專門店 禪 札幌"}],
+{t:"19:00",n:"晚餐：牛肉涮涮鍋・壽喜燒專門店 禪",d:"已訂位 19:00，4 位。訂位資訊見下方。吃飽有時間可再去大通公園或狸小路",q:"牛しゃぶしゃぶ・すき焼専門店 禅 札幌市中央区南2条西1丁目 山口中央ビル"}],
 notes:["19:00 已訂壽喜燒，不要在小樽逛到太晚","雪太大時，優先保留三角市場與壽喜燒，縮短界町通"]},
 {n:3,date:"12/01",title:"前往旭川",stay:{n:"Court Hotel Asahikawa",q:"Court Hotel Asahikawa"},ev:[
 {t:"10:00",n:"退房",d:"",drive:"開車 2–2.5 小時前往旭川",q:"APA Hotel & Resort Sapporo"},
@@ -109,19 +110,19 @@ notes:["Airbnb 為 4 位入住（12/3–12/4），請先確認停車位與入住
 {t:"10:20",n:"札幌市區自由活動",d:"",q:"札幌駅"},
 {t:"11:00",n:"午餐：海鮮處 魚屋台所 本店（推薦）",d:"二条市場附近的海鮮丼。市場不在機場方向，請預留回取車與前往機場的時間",drive:"開車 0.5–1 小時前往機場",q:"海鮮處 魚屋台所 本店 札幌"},
 {t:"13:30",n:"抵達機場周邊、加油",d:"",q:"新千歲機場 加油站"},
-{t:"14:00",n:"還車、租車公司接駁",d:"",q:"新千歲機場 租車"},
+{t:"14:00",n:"還車、租車公司接駁",d:"在租車公司還車並支付租車費用，詳見下方",q:"〒066-0015 千歳市青葉8丁目9番8"},
 {t:"14:45",n:"機場購物、吃東西",d:"",q:"新千歲機場"},
 {t:"16:00",n:"航空公司報到、安檢",d:"比原本提早 1 小時 30 分，保留托運與安檢的緩衝",q:"新千歲機場"},
 {t:"18:15",n:"飛機起飛（TR 893）",d:"",q:"新千歲機場"}],
 notes:["札幌到機場需預留雪天延誤","報到已提前至 16:00，請向航空公司確認櫃檯開放與關閉時間"]}],
 flags:["Day 4 晚餐仍是暫定，請確認是否訂位；午餐「ちゃい」缺少地點資訊。","Day 5 Airbnb 已附連結，請到頁面確認地址與停車位，之後可補上 Google Maps 導航。","Day 1 21:00 才吃湯咖哩，若營業到較早會來不及，請訂位前確認。"],
 food:[
-{n:"牛肉涮涮鍋・壽喜燒專門店 禪",a:"Day 2 晚餐（已訂位 19:00）",q:"牛肉涮涮鍋 壽喜燒專門店 禪 札幌",s:"PDF"},
+{n:"牛肉涮涮鍋・壽喜燒專門店 禪",a:"Day 2 晚餐（已訂位 19:00，4 位）。北海道札幌市中央区南2条西1丁目 山口中央ビル地下1F，電話 011-219-6522",q:"牛しゃぶしゃぶ・すき焼専門店 禅 札幌市中央区南2条西1丁目 山口中央ビル",s:"PDF"},
 {n:"小樽三角市場",a:"Day 2 午餐，海鮮丼",q:"小樽三角市場",s:"PDF"},
 {n:"山頭火 旭川",a:"Day 3 午餐 12:30，拉麵",q:"山頭火 旭川",s:"PDF"},
 {n:"ちゃい",a:"Day 4 午餐",q:"ちゃい 美瑛",s:"PDF"},
 {n:"Sukiyaki Sankousha 三光舍壽喜燒",a:"Day 4 晚餐 18:30（暫定，備案見下方）",q:"Sukiyaki Sankousha Asahikawa 三光舍壽喜燒",s:"PDF"},
-{n:"札幌湯咖哩（候補：GARAKU、Suage+ 擇一）",a:"Day 1 晚餐，距飯店與大通公園近",q:"GARAKU 湯咖哩 札幌",s:"候補"},
+{n:"Soup Curry GARAKU",a:"Day 1 晚餐推薦。札幌市中央區南3條西2丁目7，離大通站與狸小路步行約 5 分鐘。排隊名店，電話 011-233-5568",q:"Soup Curry GARAKU 札幌",s:"推薦",p:"待確認"},{n:"湯咖哩 Suage+ 本店",a:"Day 1 晚餐推薦。札幌市中央区南4条西5丁目 都志松ビル2F，薄野站步行約 2 分鐘。招牌炭烤知床雞，本店限定墨魚黑湯",q:"湯咖哩 Suage+ 本店 札幌",s:"推薦",h:"11:30–22:30（最後點餐 21:30，資料較舊，待確認）"},
 {n:"成吉思汗 大黒屋 五丁目店",a:"Day 3 晚餐推薦。旭川名物生羊肉，離旭川車站步行約 11 分",q:"成吉思汗 大黒屋 五丁目店 旭川",s:"推薦",h:"平日 16:00–23:30；週末與假日 15:00–23:30（最後點餐為打烊前 30 分）",c:"無（出發前請再確認）",p:"約 3,000–5,000 日圓／人"},{n:"銀貓（新子燒）",a:"Day 3 或 Day 4 備案。旭川在地烤雞老店，離買物公園近",q:"焼鳥専門 ぎんねこ 旭川",s:"推薦",h:"約 13:00 起（詳細待確認）"},{n:"炭屋 旭川店（鹽味內臟）",a:"Day 4 暫定晚餐的備案。旭川平價在地美食",q:"炭屋 旭川店",s:"推薦",p:"鹽味內臟單盤約 360 日圓（舊資料，待確認）"},
 {n:"粋な居酒屋 おいよ 狸小路4丁目店",a:"Day 5 晚餐推薦。海鮮居酒屋，Hotpepper 評分 4.4。店內熱鬧，也有評論認為偏觀光客，4 人建議先訂位",q:"粋な居酒屋 おいよ 狸小路4丁目店",s:"推薦",h:"週一至四、祝日 16:00–24:00；週五、六 16:00–翌 1:00；週日 16:00–24:00",c:"僅 12/31、1/1"},{n:"おたる亭 弥助（備案）",a:"Day 5 晚餐備案。狸COMICHI 內的壽司居酒屋",q:"おたる亭 弥助 狸COMICHI",s:"推薦"},{n:"旭川拉麵村",a:"Day 5 午餐推薦。集結 7 家旭川拉麵店（青葉、棅光軒、天金等），4 人可選不同店。山頭火已在 Day 3 吃過",q:"旭川拉麵村",s:"推薦"},{n:"蜂屋 旭川本店",a:"Day 5 午餐備案。旭川拉麵老店，特色是焦香豬油",q:"蜂屋 旭川本店",s:"推薦",h:"10:00–15:20（假日 11:00 起，資料較舊，待確認）",c:"週三（Day 5 為週四）"},{n:"海鮮處 魚屋台所 本店",a:"Day 6 午餐推薦。二条市場附近的海鮮丼，食材用完可能提早打烊，建議開店後就去。記得這跟 Day 2 午餐都是海鮮",q:"海鮮處 魚屋台所 本店 札幌",s:"推薦"}]};
 const LISTS={"證件與文件":["護照","機票／登機證","租車文件與國際駕照駕照翻譯本","ETC 卡與保險資料","Airbnb 與飯店訂房確認"],"衣物":["保暖外套與發熱衣","防滑雪地鞋","手套、圍巾、帽子","暖暖包"],"電子":["相機與記憶卡","手機充電線與行動電源","日本網路 SIM／eSIM"],"盥洗":["牙刷牙膏","保濕乳液與護唇膏","常備藥"],"雪地自駕":["雪刷與除冰噴劑（確認租車有附）","太陽眼鏡","車用手機架"],"出發前確認":["確認 PDF 待確認事項","確認 Day 4 晚餐訂位","確認航班報到時間","匯率與換錢"]};
@@ -134,12 +135,20 @@ const EXTRA={
 2:()=>`<div class="box"><h3>神宮參拜流程</h3><ol class="safe"><li>鳥居前輕輕鞠躬。</li><li>到手水舍洗手、漱口（如果有開放）。</li><li>到拜殿投香油錢。</li><li>如果有鈴，輕輕搖一次。</li><li>二禮二拍手一禮：鞠躬兩次、拍手兩次、合掌默默祈願、再鞠躬一次。</li><li>離開鳥居前，再輕輕鞠躬即可。</li></ol>${thumbs(XI.shrine)}</div>`,
 5:()=>`<div class="box"><h3>狸小路商店街</h3><p class="sub">共 1～7 丁目，由東往西排列。</p><ul class="safe"><li>1 丁目：餐廳、咖啡廳、部分伴手禮店</li><li>2 丁目：藥妝、美食、服飾店</li><li>3 丁目：最熱鬧，人潮最多，連鎖商店與藥妝店多</li><li>4 丁目：服飾、生活用品、特色小店</li><li>5 丁目：美食、居酒屋、紀念品店較多</li><li>6 丁目：人潮較少，有一些特色店家和餐廳</li><li>7 丁目：較安靜，保留老街氛圍，有咖啡廳、居酒屋及在地店家</li></ul>
 <h3 style="font-size:18px;margin-top:12px">簡報中的店家</h3><ul class="safe"><li>2 丁目 ${L("BEER HALL LION 狸小路店","BEER HALL LION 狸小路店")}（營業至 21:00）</li><li>3 丁目 ${L("AOAO SAPPORO 水族館","AOAO SAPPORO")}（最晚 21:00 入館，成人票 2,200 日圓）</li><li>3 丁目 ${L("松本清","松本清 狸小路")}、${L("國民藥妝","國民藥妝 狸小路")}</li><li>4 丁目 ${L("KOBUSHIYA","KOBUSHIYA 狸小路")}（伴手禮，22:00）、${L("唐吉訶德","唐吉訶德 狸小路")}</li><li>5 丁目 ${L("本陣狸大明神社","本陣狸大明神社")}（觸碰狸地藏獲得護佑）</li><li>5 丁目 ${L("大國藥妝","大國藥妝 狸小路")}（22:50）</li><li>6 丁目 ${L("札幌新倉屋","札幌新倉屋 狸小路")}（糰子，18:00）、${L("酒と銀seis","酒と銀seis 札幌")}（23:00）</li></ul>${thumbs(XI.tanuki)}</div>`};
+const ADDR="〒066-0015 千歳市青葉8丁目9番8",RMAP="https://maps.app.goo.gl/bqeQ2U9SGQ95GuNk9?g_st=ic";
+const CAR=`<p>地址：${ADDR}<br><a class="btn" href="${RMAP}" target="_blank" rel="noopener">租車公司地圖</a></p>`;
+EXTRA[1]=()=>`<div class="box"><h3>取車流程</h3><ol class="safe"><li>取車前提供所有駕駛者的護照，以及在日本開車的有效駕照。</li><li>線上解說保險內容以及開車注意事項。</li><li>前往國內線抵達處（外面）搭乘計程車到租車公司，計程車費用由客人自行負擔。</li><li>核實資訊、確認預約內容後，取車當天會以照片傳送取車地點與鑰匙位置。</li><li>取車後檢查車子外觀。若天色已黑，隔天可再錄影或拍照。</li></ol>${CAR}</div>
+<div class="box"><h3>大通公園（慕尼黑聖誕市集）</h3><ul class="safe"><li>札幌白色燈樹節的大通會場，2026 預定 11/20–12/25，在大通公園西 3–5 丁目一帶，免費入場。</li><li>慕尼黑聖誕市集預定設在大通公園西 1、2 丁目，有商品區與熱食飲食區，可在寒冷夜晚吃熱食。</li><li>營業與點燈時間：2026 詳細時間官方尚未完整公布，請出發前查看官方活動頁，不要直接沿用去年時間。</li><li>搭地鐵到大通站，27 號出口接近 1 丁目。</li></ul>${L("大通公園地圖","大通公園 札幌")}</div>
+<div class="box"><h3>狸小路商店街</h3><ul class="safe"><li>約 900 公尺的有蓋拱廊商店街，夜晚也明亮，下雪天好逛。</li><li>有藥妝、唐吉訶德、伴手禮、居酒屋與餐廳，詳細店家見 Day 5。</li><li>營業時間依店家而異。依簡報，多數店家標示約 21:00–23:00 打烊，晚上 19:30 抵達仍來得及。</li></ul>${L("狸小路地圖","狸小路商店街")}</div>
+<div class="box"><h3>湯咖哩推薦</h3><ul class="safe"><li>${L("Soup Curry GARAKU","Soup Curry GARAKU 札幌")}：和風高湯加香料的人氣名店，離大通與狸小路約 5 分鐘。常要排隊，營業時間待確認，賣完可能提早打烊。</li><li>${L("湯咖哩 Suage+ 本店","湯咖哩 Suage+ 本店 札幌")}：薄野，清爽湯頭搭配炭烤知床雞。資料顯示營業 11:30–22:30，最後點餐 21:30，21:00 到達會有點趕，請先確認。</li></ul></div>`;
+EXTRA[6]=()=>`<div class="box"><h3>還車流程</h3><ul class="safe"><li>最後一天必須在租車公司還車，並支付租車費用。</li><li>還車前先加滿油。</li><li>租車公司接駁到機場，請預留時間。</li></ul>${CAR}</div>`;
+{const o2=EXTRA[2];EXTRA[2]=()=>`<div class="box"><h3>晚餐訂位：牛しゃぶしゃぶ・すき焼専門店 禅</h3><ul class="safe"><li>訂位狀態：已確定</li><li>日期時間：2026/11/30（週一）19:00</li><li>人數：4 位</li><li>方式：只訂位（未選套餐），桌席、禁菸</li><li>電話：011-219-6522</li><li>地址：北海道札幌市中央区南2条西1丁目 山口中央ビル地下1F</li></ul>${L("導航","牛しゃぶしゃぶ・すき焼専門店 禅 札幌市中央区南2条西1丁目 山口中央ビル")}</div>`+o2()}
 /* ===== 以下是程式，不需修改 ===== */
 const $=s=>document.querySelector(s),E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const M=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
 const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){alert("儲存空間已滿，請刪除部分照片。");return false}};
-const views=[["home","首頁"],["trip","行程"],["food","餐廳"],["budget","預算"],["photos","相簿"],["list","清單"],["weather","天氣"]];
+const views=[["home","首頁"],["trip","行程"],["food","餐廳"],["budget","預算"],["list","清單"],["weather","天氣"]];
 $("#nav").innerHTML=views.map(v=>`<a href="#${v[0]}" data-v="${v[0]}">${v[1]}</a>`).join("");
 $("#dayCards").innerHTML=DATA.days.map(d=>`<a href="#day${d.n}"><small>DAY ${d.n} · ${d.date}</small><h3>${E(d.title)}</h3><div style="font-size:13px;color:var(--tan)">${E(d.stay.n)}</div></a>`).join("");
 $("#flags").innerHTML=DATA.flags.map(f=>`<div class="warn">${E(f)}</div>`).join("");
@@ -159,10 +168,12 @@ const W=[["札幌",43.06,141.35],["小樽",43.19,140.99],["旭川",43.77,142.36]
 $("#wx").innerHTML=W.map(w=>`<div class="box"><h3>${w[0]}</h3><p><a href="https://www.windy.com/${w[1]}/${w[2]}?${w[1]},${w[2]},9" target="_blank" rel="noopener">Windy 降雪、風速</a><br><a href="https://www.google.com/search?q=${encodeURIComponent(w[0]+" 天氣")}" target="_blank" rel="noopener">天氣預報</a></p></div>`).join("")+`<div class="box"><h3>警報與路況</h3><p><a href="https://www.jma.go.jp/bosai/warning/" target="_blank" rel="noopener">日本氣象廳 警報</a><br><a href="https://tenki.jp/" target="_blank" rel="noopener">tenki.jp</a></p></div>`;
 /* budget */
 const CATS=["機票","租車","住宿","ETC／高速公路費","油錢","餐飲","購物","景點門票","其他"];
-let B=ld("hk_budget",{rate:0.21,total:0,rows:[]});if(!B.names)B.names=[B.pa||"我",B.pb||"男友","朋友 C","朋友 D"];
+let B=ld("hk_budget",{rate:0.21,total:0,rows:[]});if(!B.names)B.names=["允","哲宇","家妤","可晴"];
 const tw=r=>r.cur==="JPY"?r.amt*B.rate:r.amt,f0=n=>Math.round(n).toLocaleString();
 const opt=a=>a.map(x=>`<option>${E(x)}</option>`).join("");
-function bud(){sv("hk_budget",B);$("#rate").value=B.rate;$("#total").value=B.total;B.names.forEach((n,i)=>$("#n"+i).value=n);
+function settle(){const n=B.names,t=B.rows.reduce((a,r)=>a+tw(r),0),sh=t/n.length;const bal=n.map(x=>B.rows.filter(r=>r.p===x).reduce((a,r)=>a+tw(r),0)-sh);const c=n.map((x,i)=>[x,bal[i]]).filter(a=>a[1]>0.5).sort((a,b)=>b[1]-a[1]),d=n.map((x,i)=>[x,-bal[i]]).filter(a=>a[1]>0.5).sort((a,b)=>b[1]-a[1]);const out=[];let i=0,j=0;while(i<d.length&&j<c.length){const m=Math.min(d[i][1],c[j][1]);out.push(E(d[i][0])+" 要給 "+E(c[j][0])+" "+f0(m));d[i][1]-=m;c[j][1]-=m;if(d[i][1]<0.5)i++;if(c[j][1]<0.5)j++}
+$("#settle").innerHTML=`<h3>平分結算</h3><p class="sub">全部支出由 ${n.length} 人平分，每人 TWD ${f0(sh)}</p>`+(out.length?`<ul class="safe">${out.map(x=>`<li>${x}（TWD）</li>`).join("")}</ul>`:`<p class="safe">目前不需要互相轉帳。</p>`)}
+function bud(){settle();sv("hk_budget",B);$("#rate").value=B.rate;$("#total").value=B.total;B.names.forEach((n,i)=>$("#n"+i).value=n);
  $("#nc").innerHTML=opt(CATS);$("#np").innerHTML=opt(B.names);
  const sum=B.rows.reduce((s,r)=>s+tw(r),0),by=n=>B.rows.filter(r=>r.p===n).reduce((s,r)=>s+tw(r),0);
  $("#sum").innerHTML=`<div>總花費 TWD<b>${f0(sum)}</b></div><div>預算差額<b>${B.total?f0(B.total-sum):"—"}</b></div>${B.names.map(n=>`<div>${E(n)} 已付<b>${f0(by(n))}</b></div>`).join("")}`+CATS.map(c=>{const v=B.rows.filter(r=>r.c===c).reduce((s,r)=>s+tw(r),0);return v?`<div>${c}<b>${f0(v)}</b></div>`:""}).join("");
@@ -172,14 +183,6 @@ $("#rate").onchange=e=>{B.rate=+e.target.value||0;bud()};$("#total").onchange=e=
 $("#add").onclick=()=>{const a=+$("#na").value;if(!a)return alert("請輸入金額");B.rows.push({c:$("#nc").value,d:$("#nd").value,amt:a,cur:$("#ncur").value,p:$("#np").value});$("#nd").value="";$("#na").value="";bud()};
 $("#rows").onchange=e=>{const t=e.target,i=t.dataset.i;if(i==null)return;B.rows[i][t.dataset.k]=t.dataset.k==="amt"?+t.value||0:t.value;bud()};
 $("#rows").onclick=e=>{const i=e.target.dataset.del;if(i!=null&&confirm("刪除這筆支出？")){B.rows.splice(i,1);bud()}};
-/* photos */
-let P=ld("hk_photos",{}),pd=1;
-$("#pchips").innerHTML=DATA.days.map(d=>`<a href="#" data-p="${d.n}">DAY ${d.n}</a>`).join("");
-function wall(){document.querySelectorAll("#pchips a").forEach(a=>a.classList.toggle("on",+a.dataset.p===pd));const L=P[pd]||[];
- $("#wall").innerHTML=L.length?L.map((s,i)=>`<div><img src="${s}" alt="DAY ${pd} 照片 ${i+1}"><button class="x" data-rm="${i}" style="background:var(--card)">刪除</button></div>`).join(""):`<div class="empty" style="column-span:all">DAY ${pd} 還沒有照片，點上方選擇檔案上傳。</div>`}
-$("#pchips").onclick=e=>{e.preventDefault();if(e.target.dataset.p){pd=+e.target.dataset.p;wall()}};
-$("#up").onchange=async e=>{for(const f of e.target.files){const s=await new Promise(r=>{const im=new Image,u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,900/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);r(c.toDataURL("image/jpeg",.72))};im.onerror=()=>r(null);im.src=u});if(s){(P[pd]=P[pd]||[]).push(s);if(!sv("hk_photos",P)){P[pd].pop();break}}}e.target.value="";wall()};
-$("#wall").onclick=e=>{if(e.target.tagName==="IMG"){$("#lb img").src=e.target.src;$("#lb").classList.add("on")}else if(e.target.dataset.rm!=null&&confirm("刪除這張照片？")){P[pd].splice(e.target.dataset.rm,1);sv("hk_photos",P);wall()}};
 $("#day").onclick=e=>{if(e.target.tagName==="IMG"){$("#lb img").src=e.target.src;$("#lb").classList.add("on")}};
 document.querySelector(".hero").style.backgroundImage="linear-gradient(#0000 40%,#2a201a99),url("+IMG.hero+")";
 $("#lb").onclick=()=>$("#lb").classList.remove("on");
@@ -196,5 +199,5 @@ function route(){let h=location.hash.slice(1)||"home",m=/^day([1-6])$/.exec(h),v
  document.querySelectorAll("#nav a").forEach(a=>a.classList.toggle("on",a.dataset.v===v));
  if(v==="trip"){const n=m?+m[1]:1;showDay(n);document.querySelectorAll("#chips a").forEach(a=>a.classList.toggle("on",+a.dataset.d===n))}
  window.scrollTo(0,0)}
-addEventListener("hashchange",route);bud();wall();chk();route();
+addEventListener("hashchange",route);bud();chk();route();
 </script></body></html>
