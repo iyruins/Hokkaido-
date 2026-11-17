@@ -54,7 +54,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;b
 .fl{animation:fall 8s linear infinite}@keyframes fall{from{transform:translateY(-12px);opacity:0}15%{opacity:.9}to{transform:translateY(240px);opacity:.2}}
 .bob{animation:bob 4s ease-in-out infinite alternate}@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-4px)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
-.mh{font-size:24px!important;margin:26px 0 4px!important}</style></head><body>
+.mh{font-size:24px!important;margin:26px 0 4px!important}.ed{border:1px solid var(--line);border-radius:16px;padding:10px;margin:10px 0}.ed input,#day textarea{display:block;width:100%;margin:4px 0}.ed .r{display:flex;gap:6px;align-items:center}.ed .r input{flex:1}.ed .r input:first-child{flex:none}</style></head><body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <symbol id="plane" viewBox="0 0 40 20"><path d="M2 11 L30 8 Q38 8 38 10 Q38 12 30 12 L2 12Z" fill="#fff"/><path d="M16 9 L10 2 L14 2 L24 9Z" fill="#e8eef5"/><path d="M16 12 L10 19 L14 19 L24 12Z" fill="#cfdae6"/><path d="M2 11 L0 5 L5 5 L8 11Z" fill="#a9bdd3"/></symbol>
 <symbol id="car" viewBox="0 0 50 24"><path d="M2 16 Q2 10 8 9 L14 4 Q16 3 20 3 L32 3 Q35 3 37 6 L41 9 Q48 10 48 16 L48 19 L2 19Z" fill="#6b5646"/><path d="M16 5 L31 5 L35 9 L12 9Z" fill="#d7e0ea"/><path d="M15 3 Q24 -1 33 3Z" fill="#fff"/><circle cx="12" cy="19" r="4" fill="#3b2d25"/><circle cx="38" cy="19" r="4" fill="#3b2d25"/></symbol>
@@ -74,7 +74,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;b
  <h2>六天快速導覽</h2><div class="days" id="dayCards"></div>
  <div class="box"><h3>PDF 資訊待確認</h3><div id="flags"></div></div>
 </section>
-<section id="trip"><div class="chips" id="chips"></div><div id="day"></div></section>
+<section id="trip"><div class="chips" id="chips"></div><div id="day"></div><div class="box"><h3>備份與分享行程修改</h3><p class="sub">行程修改只存在這支裝置。複製備份碼，可以貼到另一支手機匯入。</p><button id="bx">複製備份碼</button> <button id="bi" class="x">匯入備份碼</button><textarea id="bt" rows="3" style="width:100%;margin-top:8px" placeholder="備份碼貼在這裡"></textarea></div></section>
 <section id="stay"><h2>住宿資訊</h2><p class="sub">三個住宿的入住與退房時間取自行程簡報。</p><div id="stayList"></div></section><section id="food"><h2>餐廳專區</h2><p class="sub">每一餐都有備案。已決定的餐點，備案找同類型；尚未決定的餐點，列出不同類型讓你挑。沒有查到的營業時間、公休日與價格會標示待確認。</p><div id="foodList"></div></section>
 <section id="budget"><h2>旅行預算</h2><p class="sub">資料存在這支手機的瀏覽器中。匯率為手動設定，非即時。</p><div class="box"><div style="display:flex;gap:10px;flex-wrap:wrap"><label>日幣匯率 1 JPY = <input id="rate" type="number" step="0.001" style="width:90px"> TWD</label><label>總預算 TWD <input id="total" type="number" style="width:110px"></label><label>同行 <input id="n0" style="width:70px"> <input id="n1" style="width:70px"> <input id="n2" style="width:70px"> <input id="n3" style="width:70px"></label></div></div>
 <div class="sum" id="sum"></div><div class="box" id="settle"></div>
@@ -128,7 +128,7 @@ notes:["日落前離開山區，白金到旭川路段務必慢開"]},
 {t:"11:00",n:"午餐：旭川拉麵村（推薦）",d:"7 家拉麵店，4 人可各選不同店。備案：蜂屋",drive:"開車 1.5–2 小時回札幌",q:"旭川拉麵村"},
 {t:"14:00",n:"Check in",d:"Airbnb",q:"〒003-0026 Hokkaido, Sapporo, Shiroishi Ward, Hondōri, 5 Minami−4−12 ＪＨＴビル本通"},
 {t:"14:30",n:"狸小路商店街",d:"1–7 丁目由東往西。3 丁目最熱鬧；AOAO SAPPORO 水族館成人 2,200 日圓、最晚 21:00 入館",q:"狸小路商店街"},
-{t:"18:00",n:"晚餐：燒肉 Yakiniku GINGA（推薦）",d:"狸小路一帶的燒肉店，也有內臟與成吉思汗。4 人建議先訂位。備案：炭火兜 成吉思汗、おいよ海鮮居酒屋",q:"Yakiniku GINGA 札幌"}],
+{t:"19:00",n:"晚餐：TOKUJU Shinra-tei（已訂位）",d:"12/3（週四）19:00，4 位。郵遞區號 060-0063，詳細地址請看訂位信。備案：Yakiniku GINGA、炭火兜 成吉思汗",q:"TOKUJU Shinra-tei 札幌",u:"https://maps.app.goo.gl/D3jiWW8HVSExynUW6?g_st=ic"}],
 notes:["Airbnb 為 4 位入住（12/3–12/4），已確認有停車位，請再確認入住方式"]},
 {n:6,date:"12/04",title:"返台",stay:{n:"溫暖的家",q:""},ev:[
 {t:"10:00",n:"退房",d:"",q:"〒003-0026 Hokkaido, Sapporo, Shiroishi Ward, Hondōri, 5 Minami−4−12 ＪＨＴビル本通"},
@@ -140,7 +140,7 @@ notes:["Airbnb 為 4 位入住（12/3–12/4），已確認有停車位，請再
 {t:"16:00",n:"航空公司報到、安檢",d:"比原本提早 1 小時 30 分，保留托運與安檢的緩衝",q:"新千歲機場"},
 {t:"18:15",n:"飛機起飛（TR 893）",d:"",q:"新千歲機場"}],
 notes:["札幌到機場需預留雪天延誤","報到已提前至 16:00，請向航空公司確認櫃檯開放與關閉時間"]}],
-flags:["Day 4 晚餐仍是暫定，請確認是否訂位。","Day 3 與 Day 5 的燒肉都只是推薦，尚未訂位。",],
+flags:["Day 4 晚餐仍是暫定，請確認是否訂位。","Day 3 的燒肉只是推薦，尚未訂位。",],
 meals:(()=>{const I=(n,a,q,ty,x)=>Object.assign({n,a,q,ty},x||{});return[
 {k:"Day 1 晚餐",ty:"湯咖哩",o:[
 I("SHO-RIN 湯咖哩","札幌市中央区南5条西3丁目 グランド太陽ビル1階，電話 011-522-2622。營業到很晚，21:00 抵達最保險","SHO-RIN 湯咖哩 札幌 南5条西3丁目","湯咖哩",{h:"平日 11:30–15:00、17:00–翌 4:00；祝日 11:30–24:00"}),
@@ -176,11 +176,10 @@ I("炭屋 旭川店","旭川市5条通8丁目右3，平價在地美食，鹽味�
 I("旭川拉麵村","集結 7 家拉麵店，4 人可選不同店。山頭火已在 Day 3 吃過","旭川拉麵村","拉麵"),
 I("ガーデン カフェ&キッチン","漢堡排、義大利麵等洋食，咖啡廳風格","ガーデン カフェ&キッチン 旭川","洋食",{h:"11:00–22:00（每日）"}),
 I("そば処 花の家","旭川市永山3条14-3-1，大雪產蕎麥，冬季有熱騰騰的餡掛蕎麥麵（約 900 日圓）。位在永山，離上川神社需另外開車","そば処 花の家 旭川永山","蕎麥麵")]},
-{k:"Day 5 晚餐",un:1,o:[
+{k:"Day 5 晚餐",ty:"燒肉",o:[
+I("TOKUJU Shinra-tei","札幌，郵遞區號 060-0063。詳細地址請看訂位信","TOKUJU Shinra-tei 札幌","燒肉",{st:"已訂位：12/3（週四）19:00，4 位",u:"https://maps.app.goo.gl/D3jiWW8HVSExynUW6?g_st=ic"}),
 I("Yakiniku GINGA","狸小路一帶，供應燒肉、內臟與成吉思汗。4 人建議先訂位","Yakiniku GINGA 札幌","燒肉",{p:"約 5,500 日圓／人（訂位平台資料）"}),
-I("炭火兜 成吉思汗羊肉","薄野，北海道產羊肉。札幌市中央区南6条西3 Takaraビル 1F","炭火兜 成吉思汗 札幌 薄野","羊肉烤肉",{h:"18:00–24:00；週日、假日 17:00–24:00（最後點餐 23:00）"}),
-I("粋な居酒屋 おいよ 狸小路4丁目店","海鮮居酒屋，Hotpepper 評分 4.4。店內熱鬧，也有評論認為偏觀光客","粋な居酒屋 おいよ 狸小路4丁目店","海鮮居酒屋",{h:"週一至週四、祝日 16:00–24:00；週五、六 16:00–翌 1:00；週日 16:00–24:00",c:"僅 12/31、1/1"}),
-I("おたる亭 弥助","狸COMICHI 內的壽司居酒屋","おたる亭 弥助 狸COMICHI","壽司")]},
+I("炭火兜 成吉思汗羊肉","薄野，北海道產羊肉烤肉。札幌市中央区南6条西3 Takaraビル 1F","炭火兜 成吉思汗 札幌 薄野","羊肉烤肉",{h:"18:00–24:00；週日、假日 17:00–24:00（最後點餐 23:00）"})]},
 {k:"Day 6 午餐",un:1,o:[
 I("海鮮處 魚屋台所 本店","二条市場附近的海鮮丼，食材用完可能提早打烊，建議開店後就去","海鮮處 魚屋台所 本店 札幌","海鮮丼"),
 I("迴轉壽司 根室花丸 JR Tower Stellar Place 店","與札幌站相連，Stellar Place CENTER 6 樓，北海道道東海鮮壽司","回転寿司 根室花まる JRタワーステラプレイス","迴轉壽司",{h:"11:00–22:00（最後點餐 21:30）"}),
@@ -223,7 +222,7 @@ function showDay(n){const d=DATA.days[n-1];
  <div class="box"><h3>住宿</h3><p>${E(d.stay.n)}${d.stay.a?"<br>"+E(d.stay.a)+"<br>":" "}${d.stay.url?`<a class="btn" href="${E(d.stay.url)}" target="_blank" rel="noopener">Airbnb 頁面</a>`:""} ${d.stay.q?`<a class="btn" href="${M(d.stay.q)}" target="_blank" rel="noopener">地圖</a>`:""}</p></div>
  <div class="box"><h3>注意事項</h3><ul class="safe">${d.notes.map(x=>`<li>${E(x)}</li>`).join("")}</ul></div>
  ${EXTRA[n]?EXTRA[n]():""}${(IMG["d"+n]||[]).length?`<div class="box"><h3>照片</h3><div class="gal">${IMG["d"+n].map((s,i)=>`<img src="${s}" alt="DAY ${n} 照片 ${i+1}">`).join("")}</div></div>`:""}<div class="warn" style="margin-top:12px">所有時間與路程取自 PDF；景點地址請在 Google Maps 頁面查看，本站不自行填寫地址。</div>`}
-$("#foodList").innerHTML=DATA.meals.map(m=>{const card=(f,lab)=>`<div class="box"><small style="color:var(--tan)">${lab}・${E(f.ty)}</small><h3 style="font-size:20px">${E(f.n)}</h3>${f.st?`<p><b>${E(f.st)}</b></p>`:""}<p>${E(f.a||"")}</p><p class="safe">營業時間：${E(f.h||"待確認")}<br>公休日：${E(f.c||"待確認")}<br>價格：${E(f.p||"待確認")}</p><a class="btn" href="${M(f.q)}" target="_blank" rel="noopener">Google Maps</a></div>`;
+$("#foodList").innerHTML=DATA.meals.map(m=>{const card=(f,lab)=>`<div class="box"><small style="color:var(--tan)">${lab}・${E(f.ty)}</small><h3 style="font-size:20px">${E(f.n)}</h3>${f.st?`<p><b>${E(f.st)}</b></p>`:""}<p>${E(f.a||"")}</p><p class="safe">營業時間：${E(f.h||"待確認")}<br>公休日：${E(f.c||"待確認")}<br>價格：${E(f.p||"待確認")}</p><a class="btn" href="${f.u||M(f.q)}" target="_blank" rel="noopener">Google Maps</a></div>`;
 if(m.un)return `<h3 class="mh">${m.k}</h3><p class="sub">尚未決定，以下是不同類型的選擇</p><div class="grid">${m.o.map((f,i)=>card(f,"選擇 "+(i+1))).join("")}</div>`;
 return `<h3 class="mh">${m.k}</h3><div class="grid">${card(m.o[0],"主餐")}</div><h3 class="mh">${m.k}備案</h3><p class="sub">同類型：${E(m.ty)}</p><div class="grid">${m.o.slice(1).map((f,i)=>card(f,"備案 "+(i+1))).join("")}</div>`}).join("");
 /* weather */
@@ -264,7 +263,10 @@ function route(){let h=location.hash.slice(1)||"home",m=/^day([1-6])$/.exec(h),v
 const MUST=["北海道神宮","小樽運河","美瑛神社","白金青池","白鬚瀑布","上川神社","狸小路商店街"];
 const tags=e=>{let h="";if(/TR \d+/.test(e.n))h+='<span class="tg air">飛機</span>';if(/租車、取車|還車/.test(e.n))h+='<span class="tg taxi">計程車／接駁</span>';if(MUST.some(m=>e.n.includes(m)))h+='<span class="tg must">必去</span>';return h};
 const ILL=n=>{const g={1:'<use href="#plane" x="30" y="12" width="50" height="25" class="bob"/><use href="#tower" x="300" y="14" width="18" height="54"/>',2:'<use href="#torii" x="60" y="26" width="46" height="40"/><use href="#lamp" x="240" y="30" width="12" height="36"/><use href="#lamp" x="290" y="30" width="12" height="36"/>',3:'<use href="#mt" x="230" y="14" width="150" height="62"/><use href="#car" x="60" y="44" width="56" height="27" class="bob"/>',4:'<use href="#tree" x="90" y="26" width="24" height="42"/><use href="#tree" x="124" y="34" width="20" height="34"/><use href="#torii" x="260" y="30" width="42" height="36"/>',5:'<use href="#tree" x="70" y="30" width="22" height="38"/><use href="#tower" x="290" y="12" width="18" height="54"/><use href="#car" x="150" y="46" width="52" height="25" class="bob"/>',6:'<use href="#plane" x="280" y="12" width="56" height="28" class="bob"/><use href="#car" x="60" y="46" width="52" height="25"/>'}[n];return `<svg class="ban" viewBox="0 0 400 80" role="img" aria-label="DAY ${n} 插圖"><rect width="400" height="80" fill="#d7e0ea"/><path d="M0 62Q100 50 200 60T400 58V80H0Z" fill="#fbf9f4"/>${g}</svg>`};
-const showDay0=showDay;showDay=function(n){showDay0(n);const d0=$("#day");d0.insertAdjacentHTML("afterbegin",ILL(n));d0.classList.remove("pop");void d0.offsetWidth;d0.classList.add("pop")};
+let EDIT=0,CUR=1;const DEF=JSON.parse(JSON.stringify(DATA.days.map(d=>({ev:d.ev,notes:d.notes}))));let ED=ld("hk_edit",{});
+const applyED=()=>{DATA.days.forEach((d,i)=>{const x=ED[i+1],f=x&&Array.isArray(x.ev)?x:DEF[i];d.ev=JSON.parse(JSON.stringify(f.ev));d.notes=[...(f.notes||[])]})};applyED();
+const editUI=n=>{const d=DATA.days[n-1];return `<div class="box"><h3>編輯 DAY ${n}</h3><p class="sub">修改會自動存在這支裝置。</p>${d.ev.map((e,i)=>`<div class="ed" data-i="${i}"><div class="r"><input data-k="t" value="${E(e.t)}" style="width:70px" aria-label="時間"><input data-k="n" value="${E(e.n)}" placeholder="行程名稱"></div><input data-k="d" value="${E(e.d||"")}" placeholder="簡介／備註"><input data-k="drive" value="${E(e.drive||"")}" placeholder="開車時間，例如 開車 30 分"><input data-k="q" value="${E(e.q||"")}" placeholder="Google Maps 搜尋文字或地址"><div class="r"><button class="x" data-a="up">上移</button><button class="x" data-a="dn">下移</button><button class="x" data-a="rm">刪除</button></div></div>`).join("")}<p><button data-a="add">新增行程</button></p><p class="sub">注意事項，一行一則</p><textarea data-notes="1" rows="4">${E(d.notes.join("\n"))}</textarea><p><button data-a="done">完成</button> <button class="x" data-a="rs">重設這一天</button></p></div>`};
+const showDay0=showDay;showDay=function(n){showDay0(n);const d0=$("#day");CUR=n;d0.insertAdjacentHTML("afterbegin",ILL(n)+(EDIT===n?editUI(n):'<p><button data-a="edit">編輯行程</button></p>'));d0.classList.remove("pop");void d0.offsetWidth;d0.classList.add("pop")};
 const LODGE=[{n:"札幌 APA 度假酒店",d:"11/29–12/1（2 晚）",ci:"Day 1 20:00 check in",co:"Day 3 10:00 退房",q:"APA Hotel & Resort Sapporo"},{n:"Court Hotel Asahikawa",d:"12/1–12/3（2 晚）",ci:"Day 3 13:30 check in",co:"Day 5 10:00 退房",q:"Court Hotel Asahikawa"},{n:"Airbnb（札幌）",d:"12/3–12/4（1 晚，4 位）",ci:"Day 5 14:00 check in",co:"Day 6 10:00 退房",a:DATA.days[4].stay.a,q:DATA.days[4].stay.q,pk:"停車場：有停車位（已確認）",url:DATA.days[4].stay.url}];
 $("#stayList").innerHTML=LODGE.map(x=>`<div class="box"><small style="color:var(--tan)">${E(x.d)}</small><h3 style="font-size:22px">${E(x.n)}</h3>${x.a?`<p>${E(x.a)}</p>`:""}<p class="safe">${E(x.ci)}<br>${E(x.co)}<br>${E(x.pk||"停車場資訊：待確認")}</p><a class="btn" href="${M(x.q)}" target="_blank" rel="noopener">Google Maps</a>${x.url?` <a class="btn" href="${E(x.url)}" target="_blank" rel="noopener">Airbnb 頁面</a>`:""}</div>`).join("");
 function cd(){const t=Date.UTC(2026,10,29,4,20)-Date.now(),end=Date.UTC(2026,11,4,10,15)-Date.now();let h;if(t>0){const d=Math.floor(t/864e5),hr=Math.floor(t%864e5/36e5),m=Math.floor(t%36e5/6e4);h=`<span>距離出發</span><b>${d}<small>天</small></b><b>${hr}<small>時</small></b><b>${m}<small>分</small></b>`}else h=end>0?"<span>旅行進行中，玩得開心</span>":"<span>旅程結束，歡迎回家</span>";$("#cd").innerHTML=h}
@@ -277,5 +279,11 @@ const nu=q=>pos?"https://www.google.com/maps/search/"+encodeURIComponent(q)+"/@"
 function nearRender(){$("#nearList").innerHTML=NEAR.map(n=>`<a class="btn" style="padding:12px;text-align:center;font-size:15px" href="${nu(n[1])}" target="_blank" rel="noopener">${n[0]}</a>`).join("")}
 function locate(){const st=$("#locst");if(!navigator.geolocation){st.textContent="此瀏覽器不支援定位";return}st.textContent="定位中…";navigator.geolocation.getCurrentPosition(p=>{pos=p.coords;st.textContent="已使用目前位置";nearRender()},()=>{st.textContent="無法取得位置，已改用一般搜尋。請確認瀏覽器允許定位。"},{timeout:10000,maximumAge:60000})}
 $("#loc").onclick=locate;nearRender();
+const saveED=()=>{ED[CUR]={ev:DATA.days[CUR-1].ev,notes:DATA.days[CUR-1].notes};sv("hk_edit",ED)};
+$("#day").addEventListener("change",ev=>{const t=ev.target,d=DATA.days[CUR-1],box=t.closest&&t.closest(".ed");if(t.hasAttribute&&t.hasAttribute("data-notes"))d.notes=t.value.split("\n").map(x=>x.trim()).filter(Boolean);else if(box){const e=d.ev[+box.dataset.i];e[t.dataset.k]=t.value;if(t.dataset.k==="q")delete e.u}else return;saveED()});
+$("#day").addEventListener("click",ev=>{const t=ev.target,a=t.dataset&&t.dataset.a;if(!a)return;const d=DATA.days[CUR-1],box=t.closest&&t.closest(".ed"),i=box?+box.dataset.i:-1;
+if(a==="edit")EDIT=CUR;else if(a==="done")EDIT=0;else if(a==="add"){d.ev.push({t:"00:00",n:"新行程",d:"",q:""});saveED()}else if(a==="up"&&i>0){[d.ev[i-1],d.ev[i]]=[d.ev[i],d.ev[i-1]];saveED()}else if(a==="dn"&&i>=0&&i<d.ev.length-1){[d.ev[i+1],d.ev[i]]=[d.ev[i],d.ev[i+1]];saveED()}else if(a==="rm"){if(!confirm("刪除這個行程？"))return;d.ev.splice(i,1);saveED()}else if(a==="rs"){if(!confirm("重設這一天為預設內容？你的修改會消失"))return;delete ED[CUR];applyED();sv("hk_edit",ED)}else return;showDay(CUR)});
+$("#bx").onclick=()=>{const v=JSON.stringify(ED);$("#bt").value=v;try{navigator.clipboard.writeText(v)}catch(e){}};
+$("#bi").onclick=()=>{try{const o=JSON.parse($("#bt").value);if(!o||typeof o!=="object")throw 0;ED=o;applyED();sv("hk_edit",ED);showDay(CUR);alert("匯入完成")}catch(e){alert("備份碼格式不對")}};
 addEventListener("hashchange",route);bud();chk();route();
 </script></body></html>
